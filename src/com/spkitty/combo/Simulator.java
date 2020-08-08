@@ -49,15 +49,15 @@ public class Simulator {
 	
 	public boolean simulateList(ArrayList<Combo> list) {
 		hand.drawCards(deck, drawCount);
+		boolean ret = false;
 		for(int i = 0; i < list.size(); i++) 
 			if(hand.passCombo(list.get(i))) {
-				hand.resetHand(deck);
-				deck.shuffle();
-				return true;
+				ret = true;
+				break;
 			}
 		hand.resetHand(deck);
 		deck.shuffle();
-		return false;
+		return ret;
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class Simulator {
 	public double simulateComboProb(Combo c, int count) {
 		double pass = 0;
 		for(int i = 0; i < count; i++)
-			pass += simulateCombo(c) ? 1 : 0;
+			pass += (simulateCombo(c) ? 1 : 0);
 		return pass / (double) count;
 	}
 	

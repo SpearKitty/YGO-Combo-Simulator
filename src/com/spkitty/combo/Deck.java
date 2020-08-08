@@ -48,7 +48,7 @@ public class Deck {
 	 */
 	
 	public Card draw() {
-		return cards.remove(0);
+		return cards.remove(cards.size() - 1);
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class Deck {
 	 */
 	
 	public void draw(Hand target) {
-		target.add(cards.remove(0));
+		target.add(cards.remove(cards.size() - 1));
 	}
 	
 	public int size() {
