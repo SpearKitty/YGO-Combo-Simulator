@@ -14,7 +14,7 @@ public class JCBoxArray extends JPanel{
 	private JCheckBox[] boxes;
 	
 	public JCBoxArray(int size, int init_wid) {
-		this.setLayout(new GridLayout(init_wid, size / init_wid));
+		this.setLayout(new GridLayout((size / init_wid) + 1, init_wid));
 		boxes = new JCheckBox[size];
 	}
 	

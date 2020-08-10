@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class SettingManager {
 	
-	public static final String VERSION = "REL-1-0-0";
+	public static final String VERSION = "REL-1-0-1";
 	
 	public static final String DEFAULT_STRING = "25000\r\n" + 
 												"10\r\n" + 

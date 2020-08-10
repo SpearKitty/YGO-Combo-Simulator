@@ -1,4 +1,4 @@
-40870
-10
+50000
+25
 unused
 C:\\ProjectIgnis\\
