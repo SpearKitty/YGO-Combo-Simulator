@@ -65,7 +65,8 @@ public class Hand {
 	 */
 	
 	public void resetHand(Deck target) {
-		for(int i = 0; i < cards.size(); i++)
+		int m = cards.size();
+		for(int i = 0; i < m; i++)
 			target.addCard(cards.remove(0));
 	}
 	

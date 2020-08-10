@@ -14,6 +14,7 @@ import com.spkitty.frame.SettingManager;
 
 public class Deck {
 	
+	private ArrayList<Card> alwaysSortedCards;
 	private ArrayList<Card> cards;
 	
 	/**
@@ -22,6 +23,20 @@ public class Deck {
 	
 	public Deck() {
 		cards = new ArrayList<Card>(60);
+		alwaysSortedCards = new ArrayList<Card>(60);
+	}
+	
+	/**
+	 * returns card at given index, null if the index is invalid
+	 * @param index
+	 * @return
+	 */
+	public Card getCard(int index) {
+		try {
+			return cards.get(index);
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	/**
@@ -72,6 +87,18 @@ public class Deck {
 		return s;
 	}
 	
+	/**
+	 * returns true if deck contains card, false if not
+	 * @param obj
+	 * @return
+	 */
+	public boolean contains(Card obj) {
+		for(int i = 0; i < cards.size(); i++)
+			if(obj.getID() == cards.get(i).getID())
+				return true;
+		return false;
+	}
+	
 	
 	/**
 	 * imports deck from .ydk file of given name
@@ -79,8 +106,9 @@ public class Deck {
 	 * @return
 	 */
 	public boolean importDeck(String name) {
-		String ydkName = name + ".ydk";
-		try (Scanner ydkReader = new Scanner(new FileReader(SettingManager.buildCorePath() + "deck\\" + ydkName))) {
+		try (Scanner ydkReader = new Scanner(new FileReader(SettingManager.buildDeckPath() + name))) {
+			cards = new ArrayList<Card>(60); 
+			alwaysSortedCards = new ArrayList<Card>(60);
 			while(ydkReader.hasNextLine()) {
 				String obj = ydkReader.nextLine();
 				if(obj.startsWith("#") && cards.size() == 0)
@@ -88,6 +116,7 @@ public class Deck {
 				if(obj.startsWith("#") && cards.size() > 0)
 					break;
 				cards.add(new Card(obj));
+				alwaysSortedCards.add(new Card(obj));
 			}
 			return true;
 		}catch(Exception e) {
@@ -115,13 +144,20 @@ public class Deck {
 	
 	public Card[] uniqueCards() {
 		ArrayList<Card> temp = new ArrayList<Card>();
-		for(int i = 0; i < cards.size(); i++) 
-			if(!temp.contains(cards.get(i)))
-				temp.add(cards.get(i));
+		for(int i = 0; i < alwaysSortedCards.size(); i++) 
+			if(!arrContainHelperFunc(temp, alwaysSortedCards.get(i)))
+				temp.add(alwaysSortedCards.get(i));
 		Card[] ans = new Card[temp.size()];
-		for(int i = 0; i < cards.size(); i++)
+		for(int i = 0; i < temp.size(); i++)
 			ans[i] = temp.get(i);
 		return ans;
+	}
+	
+	private boolean arrContainHelperFunc(ArrayList<Card> list, Card obj) {
+		for(int i = 0; i < list.size(); i++)
+			if(list.get(i).getID() == obj.getID())
+				return true;
+		return false;
 	}
 	
 }

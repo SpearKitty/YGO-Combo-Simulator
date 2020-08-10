@@ -26,7 +26,7 @@ public class Card {
 	public Card(String init_id) {
 		id = Integer.parseInt(init_id);
 		try{
-			img = ImageIO.read(new File(SettingManager.buildCorePath() + "pics\\" + init_id + ".jpg"));
+			img = ImageIO.read(new File(SettingManager.getPath() + "pics\\" + init_id + ".jpg"));
 		}catch(Exception e) {
 			img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
 		}

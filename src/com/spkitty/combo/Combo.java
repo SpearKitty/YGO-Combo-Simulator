@@ -11,6 +11,7 @@ public class Combo {
 	
 	private ArrayList<Card> cards;
 	private ArrayList<Card> garnets;
+	private String name;
 
 	/**
 	 * initializes new empty combo
@@ -19,6 +20,7 @@ public class Combo {
 	public Combo() {
 		cards = new ArrayList<Card>();
 		garnets = new ArrayList<Card>();
+		name = "untitled_combo";
 	}
 	
 	/**
@@ -43,6 +45,20 @@ public class Combo {
 	}
 	
 	/**
+	 * removes a card, returns true if it was removed, false if it was not 
+	 * @param obj
+	 * @return
+	 */
+	public boolean removeCard(Card obj) {
+		for(int i = 0; i < cards.size(); i++)
+			if(cards.get(i).equals(obj)) {
+				cards.remove(i);
+				return true;
+			}
+		return false;
+	}
+	
+	/**
 	 * adds a garnet as an additional fail condition for the combo check
 	 * @param obj
 	 * @return
@@ -50,6 +66,20 @@ public class Combo {
 	
 	public boolean addGarnet(Card obj) {
 		return garnets.add(obj);
+	}
+	
+	/**
+	 * removes a garnet, returns true if it was removed, false if it was not 
+	 * @param obj
+	 * @return
+	 */
+	public boolean removeGarnet(Card obj) {
+		for(int i = 0; i < garnets.size(); i++)
+			if(garnets.get(i).equals(obj)) {
+				garnets.remove(i);
+				return true;
+			}
+		return false;
 	}
 	
 	/**
@@ -77,6 +107,32 @@ public class Combo {
 		for(int i = 0; i < obj.length; i++)
 			obj[i] = garnets.get(i);
 		return obj;
+	}
+
+	/**
+	 * sets name value
+	 * @param nName
+	 */
+	public void setName(String nName) {
+		name = nName;
+	}
+	
+	/**
+	 * gets name value :farfaSmiley:
+	 * @param nName
+	 */
+	public String getName() {
+		return name.trim();
+	}
+	
+	public String toString() {
+		String str = name;
+		for(int i = 0; i < cards.size(); i++)
+			str += " | " + cards.get(i);
+		str += " [garnetDiv]";
+		for(int i = 0; i < garnets.size(); i++)
+			str += " | " + garnets.get(i);
+		return str;
 	}
 	
 }
